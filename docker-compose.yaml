@@ -1,0 +1,43 @@
+version: '3'
+services:
+  order-service:
+    build: order_service 
+    volumes:
+      - .:/app
+      - logvolume01:/var/log
+    links:
+      - redis
+  # inventory-service:
+  #   build: inventory_service
+  #   volumes:
+  #     - .:/app
+  #     - logvolume01:/var/log
+  #   links:
+  #     - redis
+  # acccount-service:
+  #   build: account_service
+  #   volumes:
+  #     - .:/app
+  #     - logvolume01:/var/log
+  #   links:
+  #     - redis
+  # msg-service:
+  #   build: msg_service
+  #   volumes:
+  #     - .:/app
+  #     - logvolume01:/var/log
+  gateway-api:
+    build: gateway_api
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - logvolume01:/var/log
+    links:
+      - redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+volumes:
+  logvolume01: {}
