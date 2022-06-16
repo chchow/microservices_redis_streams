@@ -1,0 +1,133 @@
+schemes:
+  - http
+  - https
+swagger: '2.0'
+info:
+  description: API for customer service front
+  title: Customer service
+  version: 1.0.0
+host: localhost:5000
+basePath: /
+paths:
+  /order:
+    post:
+      description: Create a new order
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - gateway_api
+      operationId: createOrder
+      responses:
+        '200':
+          description: Successful response, with status of order details.
+          schema:
+            $ref: '#/definitions/order'
+        '400':
+          description: Database error evaluating cluster
+        '401':
+          description: Authorization error
+        '403':
+          description: Role access denied
+
+  /init-data:
+    post:
+      description: Initialize test data. Populate account and inventory.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - gateway_api
+      operationId: init_data
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Database error evaluating cluster
+        '401':
+          description: Authorization error
+        '403':
+          description: Role access denied
+      
+  /report:
+    get:
+      description: Show domain items. Cache data in Redis.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - gateway_api
+      operationId: report
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/report'
+        '400':
+          description: Database error evaluating cluster
+        '401':
+          description: Authorization error
+        '403':
+          description: Role access denied
+
+definitions:
+  order:
+    type: object
+    properties:
+      id:
+        type: string
+      customer_id:
+        type: string
+      product_ids:
+        type: array
+        items:
+          type: string
+      status:
+        type: string
+        enum: 
+          - pending
+          - out-of-stock
+          - payment-required
+          - shipped
+          - insufficient-fund
+          - completed
+  inventory:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      amount:
+        type: integer
+  account:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      email:
+        type: string
+      balance:
+        type: integer
+  report:
+    type: object
+    properties:
+      accounts:
+        $ref: "#/definitions/account"
+      inventory:
+        $ref: "#/definitions/inventory"
+      orders:
+        $ref: "#/definitions/order"
+      
+
+tags:
+  - description: Gateway API
+    name: gateway_api
+
