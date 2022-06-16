@@ -7,20 +7,20 @@ services:
       - logvolume01:/var/log
     links:
       - redis
-  # inventory-service:
-  #   build: inventory_service
-  #   volumes:
-  #     - .:/app
-  #     - logvolume01:/var/log
-  #   links:
-  #     - redis
-  # acccount-service:
-  #   build: account_service
-  #   volumes:
-  #     - .:/app
-  #     - logvolume01:/var/log
-  #   links:
-  #     - redis
+  inventory-service:
+    build: inventory_service
+    volumes:
+      - .:/app
+      - logvolume01:/var/log
+    links:
+      - redis
+  acccount-service:
+    build: account_service
+    volumes:
+      - .:/app
+      - logvolume01:/var/log
+    links:
+      - redis
   msg-service:
     build: msg_service
     volumes:
