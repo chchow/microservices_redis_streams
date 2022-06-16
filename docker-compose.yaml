@@ -21,11 +21,11 @@ services:
   #     - logvolume01:/var/log
   #   links:
   #     - redis
-  # msg-service:
-  #   build: msg_service
-  #   volumes:
-  #     - .:/app
-  #     - logvolume01:/var/log
+  msg-service:
+    build: msg_service
+    volumes:
+      - .:/app
+      - logvolume01:/var/log
   gateway-api:
     build: gateway_api
     ports:

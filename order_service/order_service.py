@@ -38,5 +38,6 @@ def post():
     except KeyError:
         raise ValueError("missing mandatory paramter 'product_ids' and/or 'customer_id")
 
+    app.logger.info("order to be publish")
     store.publish('order', 'created', **new_order)
     return json.dumps(new_order)
