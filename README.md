@@ -33,3 +33,5 @@ Out of stock process:
     http://localhost:5000/order
 	``
 
+## Logging
+When application is docker compose up, the logs will be output to stdout or stderr for simplicity.
