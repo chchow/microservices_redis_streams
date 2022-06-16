@@ -44,8 +44,8 @@ def post():
     except KeyError:
         raise ValueError("missing mandatory paramter 'product_ids' and/or 'customer_id")
 
-    msg = """New order {} created
-    """.format(new_order['id'])
+    msg = """New order {} created: {}
+    """.format(new_order['id'], ",".join(new_order['product_ids']))
     app.logger.info(msg)
     store.publish('order', 'created', **new_order)
     return json.dumps(new_order)
@@ -59,8 +59,8 @@ def update_order_status(item):
         order['status'] = msg_data['account']
     else:
         order['status'] = 'unknown'
-    msg = """Order {} status changed to {}
-    """.format(order['id'], order['status'])
+    msg = """Order {} status changed to {} with items: {}
+    """.format(order['id'], order['status'], ",".join(order['product_ids']))
     app.logger.info(msg)
     store.publish('order', 'updated', **order)
 

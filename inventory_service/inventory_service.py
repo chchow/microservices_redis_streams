@@ -13,7 +13,8 @@ def check_inventory(item):
     try:
         msg_data = json.loads(item['entity'])
 
-        msg = """Checking inventory for order {}...""".format(msg_data['id'])
+        msg = """Checking inventory for order {} with product_ids: {}
+        """.format(msg_data['id'], ",".join(msg_data['product_ids']))
         log_info(msg)
 
         occurs = {}
