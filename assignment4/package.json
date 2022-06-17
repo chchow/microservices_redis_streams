@@ -1,0 +1,15 @@
+{
+  "name": "assignment4",
+  "version": "1.0.0",
+  "description": "1. I'm not really sure the name but have seen this before. If I were to guess, it would be called Flyweight Design Pattern 2. It is a structural design pattern. It helps to decrease object count thus improving application required objects structure reducing the memory load. In the diagram, a list of Students are present to be reuse, so if it were to create a new object, it will first check whether such an object is already exists and can be reused, otherwise the object is created and added to the pool for future reuse.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}
